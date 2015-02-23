@@ -74,6 +74,7 @@
         "app": true,
         "common": true,
         "angular": true,
-        "console": true
+        "console": true,
+        "window": true
     }
 }

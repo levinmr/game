@@ -1,5 +1,6 @@
 module.exports = {
   browsers: ['PhantomJS'],
+  captureTimeout: 10000,
   frameworks: ['jasmine', 'closure'],
   files: [
     'bower_components/angular/angular.js',

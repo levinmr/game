@@ -16,4 +16,4 @@
 # Using secret_token for rails3 compatibility. Change to secret_key_base
 # to avoid deprecation warning.
 # Can be safely removed in a rails3 api-only application.
-Guildmaster::Application.config.secret_token = 'c644eb22e6a3afc9d93b4e6fdfc7980b4e0f3157ad8da18227bbcdebafe15fdbda859ebe95c3df430383810405b76e42e8eb1ccc2090fa145bad49f44df3dc80'
+NgHomepage::Application.config.secret_token = 'af355207ba58e99f040970c372fb617af843fc577a7321f165f66b3110e2d8d887b7a7c60011d8d9fe9e5a7a7039f71c307ec5381c3b7c5e76b6a5deb1ebf4d1'

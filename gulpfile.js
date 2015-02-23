@@ -1,13 +1,14 @@
 var _ = require('lodash'),
     args = require('yargs').argv,
     autoprefixer = require('gulp-autoprefixer'),
-    cache = require('gulp-cache'),
     cleanhtml = require('gulp-cleanhtml'),
     closureCompiler = require('gulp-closure-compiler'),
     concat = require('gulp-concat'),
     connect = require('gulp-connect'),
     env = require('./client/config/environments.js'),
+    gulpfileCache = require('gulp-file-cache'),
     flatten = require('gulp-flatten'),
+    gjslint = require('gulp-gjslint'),
     gulp = require('gulp'),
     gulpif = require('gulp-if'),
     gutil = require('gulp-util'),
@@ -52,7 +53,9 @@ var settings = {
       './bower_components/angular/angular.js',
       './bower_components/angular-route/angular-route.js',
       './bower_components/angular-touch/angular-touch.js',
-      './bower_components/jquery/dist/jquery.js'
+      './bower_components/jquery/dist/jquery.js',
+      './bower_components/lodash/dist/lodash.js',
+      './bower_components/postal.js/lib/postal.js'
     ],
     refresh: ['./public/**/*.*', './client/coverage/**/*.html'],
     script: ['./client/app/**/*.js', '!./client/app/**/*_test.js'],
@@ -76,11 +79,14 @@ var settings = {
   },
   inject: {
     addRootSlash: false,
-    ignorePath: '../../public',
+    ignorePath: 'public',
     relative: true
   }
 };
 
+var jshintFileCache = new gulpfileCache('.gulp-cache-jshint');
+var gjslintFileCache = new gulpfileCache('.gulp-cache-gjslint');
+var imageFileCache = new gulpfileCache('.gulp-cache-image');
 var forceContinue = false;
 
 function continueOnError(error) {
@@ -140,48 +146,63 @@ gulp.task('lib', function() {
     .pipe(gulp.dest(settings.folders.dist));
 });
 
-gulp.task('validate_scripts', function() {
+gulp.task('validate_scripts_jshint', function() {
   return gulp.src(settings.globs.script)
+    .pipe(jshintFileCache.filter())
     .pipe(jshint('./client/config/.jshintrc.src'))
+    .pipe(jshintFileCache.cache())
     .pipe(jshint.reporter(stylish))
     .pipe(jshint.reporter('fail'));
 });
 
-gulp.task('scripts', ['validate_scripts'], function() {
-  return gulp.src(settings.globs.compileScript)
-    .pipe(gulpif(forceContinue, plumber({errorHandler: continueOnError})))
-    .pipe(closureCompiler({
-        compilerPath: 'bower_components/closure-compiler/compiler.jar',
-        fileName: 'compiled.js',
-        compilerFlags: {
-          closure_entry_point: 'app',
-          compilation_level: settings.env.compilationLevel,
-          formatting: settings.env.formatting,
-          define: [
-            'goog.DEBUG=false'
-          ],
-          externs: [
-            './client/externs/angular-1.3.js'
-          ],
-          jscomp_error: [
-            'checkTypes'
-          ],
-          only_closure_dependencies: true,
-          manage_closure_dependencies: true,
-          warning_level: 'VERBOSE',
-          generate_exports: true,
-          angular_pass: true,
-          language_in: 'ECMASCRIPT5_STRICT',
-          tracer_mode: 'OFF'
-        }
-      }))
-    .pipe(rename(settings.output.scriptFile))
-    .pipe(gulp.dest(settings.folders.dist));
+gulp.task('validate_scripts_gjslint', function() {
+  return gulp.src('./client/app/**/*.js')
+    .pipe(gjslintFileCache.filter())
+    .pipe(gjslint({flags: ['--strict']}))
+    .pipe(gjslintFileCache.cache())
+    .pipe(gjslint.reporter('console'))
+    .pipe(gjslint.reporter('fail'));
 });
+
+gulp.task('scripts', ['validate_scripts_jshint', 'validate_scripts_gjslint'],
+    function() {
+      return gulp.src(settings.globs.compileScript)
+        .pipe(closureCompiler({
+            compilerPath: 'bower_components/closure-compiler/compiler.jar',
+            fileName: 'compiled.js',
+            compilerFlags: {
+              closure_entry_point: 'app',
+              compilation_level: settings.env.compilationLevel,
+              formatting: settings.env.formatting,
+              define: [
+                'goog.DEBUG=false'
+              ],
+              externs: [
+                './client/externs/angular-1.3.js',
+                './client/externs/jquery-1-9.js',
+                './client/externs/postal.js'
+              ],
+              jscomp_error: [
+                'checkTypes'
+              ],
+              only_closure_dependencies: true,
+              manage_closure_dependencies: true,
+              warning_level: 'VERBOSE',
+              generate_exports: true,
+              angular_pass: true,
+              language_in: 'ECMASCRIPT5_STRICT',
+              tracer_mode: 'OFF'
+            }
+          }))
+        .pipe(rename(settings.output.scriptFile))
+        .pipe(gulp.dest(settings.folders.dist));
+    });
 
 gulp.task('validate_tests', function() {
   return gulp.src(settings.globs.test)
+    .pipe(jshintFileCache.filter())
     .pipe(jshint('./client/config/.jshintrc.test'))
+    .pipe(jshintFileCache.cache())
     .pipe(jshint.reporter(stylish))
     .pipe(jshint.reporter('fail'));
 });
@@ -226,7 +247,9 @@ gulp.task('watch', function() {
       .pipe(gulp.dest(settings.folders.dist));
 
   watch({glob: settings.globs.images})
-    .pipe(cache(imagemin(settings.images)))
+    .pipe(imageFileCache.filter())
+    .pipe(imagemin(settings.images))
+    .pipe(imageFileCache.cache())
     .pipe(flatten())
     .pipe(gulp.dest(settings.folders.images));
 });

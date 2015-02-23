@@ -18,3 +18,8 @@
 /node_modules/
 /bower_components/
 /client/coverage/
+/coverage
+test-results.xml
+.gulp-cache-jshint
+.gulp-cache-gjslint
+.gulp-cache-image

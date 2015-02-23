@@ -1,5 +1,5 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe PartiesController do
+RSpec.describe PartiesController, :type => :controller do
 
 end

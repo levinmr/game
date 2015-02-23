@@ -1,38 +1,20 @@
 goog.provide('app.levela.LevelAController');
 
+goog.require('app.levela.LevelAService');
+
+
 
 /**
- * [app.levela.LevelAController description]
  * @constructor
- * @struct
+ * @param {!app.levela.LevelAService} levelAService
  * @export
  * @ngInject
  */
-/*jshint maxparams:8 */
-app.levela.LevelAController = function() {
-
-  this.init_();
-};
-
-
-/** @struct */
-app.levela.LevelAController.prototype = {
+app.levela.LevelAController = function(levelAService) {
 
   /**
-   * [init_ description]
+   * @type {!app.levela.LevelAService}
    * @private
    */
-  init_: function() {
-
-  }
-
-};
-
-
-/**
- * [selectPathway description]
- * @expose
- */
-app.levela.LevelAController.prototype.selectPathway = function() {
-
+  this.levelAService_ = levelAService;
 };

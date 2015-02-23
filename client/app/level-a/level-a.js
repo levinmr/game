@@ -17,10 +17,10 @@ app.levela.module.config(['$routeProvider', function($routeProvider) {
     .when('/level-a', {
         templateUrl: 'views/level-a/level-a.html',
         controller: app.levela.LevelAController,
-        controllerAs: 'levelaCtrl'
+        controllerAs: 'levelACtrl'
       });
 }]);
 
-app.levela.module.controller('levelaCtrl', app.levela.LevelAController);
+app.levela.module.controller('levelACtrl', app.levela.LevelAController);
 
 app.levela.module.service('levelAService', app.levela.LevelAService);

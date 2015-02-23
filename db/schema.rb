@@ -11,32 +11,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141204183946) do
+ActiveRecord::Schema.define(version: 20150222034045) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "characters", force: true do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "sex"
-    t.string   "race"
-    t.integer  "party_id"
+  create_table "character_templates", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "dungeons", force: true do |t|
+  create_table "item_templates", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "maps", force: true do |t|
+  create_table "member_items", force: true do |t|
+    t.integer  "item_template_id"
+    t.integer  "party_member_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "member_skills", force: true do |t|
+    t.integer  "skill_template_id"
+    t.integer  "party_member_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "parties", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "party_members", force: true do |t|
+    t.integer  "party_id"
+    t.integer  "character_template_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "skill_templates", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end

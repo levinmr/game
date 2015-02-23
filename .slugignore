@@ -8,7 +8,10 @@
 README.md
 /.yardoc
 /doc
-/spec
+/spec/controllers
+/spec/models
+/spec/support
+/spec/spec_helper.rb
 /tmp/*
 /client
 /node_modules

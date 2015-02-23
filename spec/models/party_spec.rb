@@ -1,5 +1,5 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Party do
+RSpec.describe Party, :type => :model do
   pending "add some examples to (or delete) #{__FILE__}"
 end

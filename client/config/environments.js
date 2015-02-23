@@ -6,7 +6,7 @@ module.exports = {
   debug: {
     minifyCss: false,
     cleanHtml: true,
-    compilationLevel: 'WHITESPACE_ONLY',
+    compilationLevel: 'SIMPLE_OPTIMIZATIONS',
     formatting: 'PRETTY_PRINT'
   },
   local: {

@@ -1,3 +1,4 @@
-class Party < ActiveRecord::Base
-  has_many :characters
+class Party < AbstractModel
+
+  has_many :party_members
 end

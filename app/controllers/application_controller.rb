@@ -1,14 +1,16 @@
+require 'convert_hash_case'
+
 class ApplicationController < ActionController::API
+
   include ActionController::MimeResponds
+  include ConvertHashCase
+  include GlobalConstants
 
-  before_filter :redirect_non_json
+  before_filter :convert_params_to_snake_case
 
-  def redirect_non_json
-    respond_to do |format|
-      format.json {}
-      format.any do
-        redirect_to '/'
-      end
-    end
+  private
+
+  def convert_params_to_snake_case
+    @params = ActionController::Parameters.new( hash_keys_to_snake_case( params ) )
   end
 end

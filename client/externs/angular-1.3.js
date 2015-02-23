@@ -1226,6 +1226,10 @@ angular.HttpCallback;
  *       ?function(!angular.$http.Response),
  *       ?function(!angular.$http.Response)=,
  *       ?function(!angular.$http.Response)=): !angular.$http.HttpPromise,
+ *   catch: function(
+ *       ?function(!angular.$http.Response)): !angular.$http.HttpPromise,
+ *   finally: function(
+ *       ?function(!angular.$http.Response)): !angular.$http.HttpPromise,
  *   success: function(!angular.HttpCallback): !angular.$http.HttpPromise,
  *   error: function(!angular.HttpCallback): !angular.$http.HttpPromise
  * }}
@@ -1239,6 +1243,18 @@ angular.$http.HttpPromise;
  */
 angular.$http.HttpPromise.then = function(
     successCallback, opt_errorCallback) {};
+
+/**
+ * @param {?function(!angular.$http.Response)} callback
+ * @return {!angular.$http.HttpPromise}
+ */
+angular.$http.HttpPromise.catch = function(callback) {};
+
+/**
+ * @param {?function(!angular.$http.Response)} callback
+ * @return {!angular.$http.HttpPromise}
+ */
+angular.$http.HttpPromise.finally = function(callback) {};
 
 /**
  * @param {angular.HttpCallback} callback
@@ -1273,11 +1289,6 @@ angular.$HttpProvider;
  * @type {angular.$http.Config}
  */
 angular.$HttpProvider.defaults;
-
-/**
- * @type {Array}
- */
-angular.$HttpProvider.interceptors;
 
 /******************************************************************************
  * $injector Service
@@ -1756,9 +1767,12 @@ angular.$q.Deferred.notify = function(opt_value) {};
 angular.$q.Deferred.promise;
 
 /**
- * @typedef {{then: function(?function(?), ?function(?)=, ?function(?)=):
- *                      angular.$q.Promise,
- *            catch: function(?)}}
+ * @typedef {{
+ *   then: function(?function(?), ?function(?)=, ?function(?)=):
+ *       angular.$q.Promise,
+ *   catch: function(?function(?)):angular.$q.Promise,
+ *   finally: function(?function(?)):angular.$q.Promise
+ * }}
  */
 angular.$q.Promise;
 
@@ -1770,11 +1784,16 @@ angular.$q.Promise;
 angular.$q.Promise.then = function(successCallback, opt_errorCallback) {};
 
 /**
- * [catch description]
- * @param {?function(?)=} opt_errorCallback
+ * @param {?function(?)} callback
  * @return {!angular.$q.Promise}
  */
-angular.$q.Promise.catch = function(opt_errorCallback) {};
+angular.$q.Promise.catch = function(callback) {};
+
+/**
+ * @param {?function(?)} callback
+ * @return {!angular.$q.Promise}
+ */
+angular.$q.Promise.finally = function(callback) {};
 
 /******************************************************************************
  * $route Service
@@ -1901,20 +1920,6 @@ angular.$routeProvider.Params.reloadOnSearch;
 /******************************************************************************
  * $sanitize Service
  *****************************************************************************/
-
-/******************************************************************************
- * $compileProvider Service
- *****************************************************************************/
-
-/**
- * @typedef {{
- *   imgSrcSanitizationWhitelist:
- *       function(): !string,
- *   aHrefSanitizationWhitelist:
- *       function(): !string
- *   }}
- */
-angular.$compileProvider;
 
 /** @typedef {function(string):string} */
 angular.$sanitize;

@@ -2,12 +2,13 @@ initial demo
 
 requirements:
 -character list
--party with 3-5 spaces in it
+-party with 4 spaces in it
 -ability to add characters to party
--When party has > 0 characters, button to send on adventure is enabled
--send on adventure button loads map
--map is populated with 3-5 dungeons
--clicking on dungeon starts simulation
+-When party is full, button to find a match is enabled
+-clicking on button puts the party in the queue to be matched
+  -Also navigates to level-b which is the matchup / sim results page
+-If match is not found within a configurable amount of seconds (start with 15), match with CPU team
+-when matched, simulation is run
 -simulation is shown as text on page, line by line
 -summary/result is displayed after clicking out of simulation
   - Alternative "just show me the result" button to skip simulation
@@ -15,42 +16,37 @@ requirements:
 
 server:
   - models:
-    -character
-    -map
+    -character_template
     -party
-    -dungeon
+    -party_member
+    -item_template
+    -member_item
+    -skill_template
+    -member_skill
+    -match
     -sim?
 
   -non rest actions:
-   - add character to party
-   - single select of a dungeon
    - begin simulation
-   - get sim lines?
+   - get sim lines?  (Would be rest if sim/lines are in the DB)
 
 client:
   routes:
     -level-a:
       - has character list, party slots, and start adventure button
     -level-b:
-      - has map, dungeons, current party
-    -level-c:
-      - has sim result, party, dungeon
+      - current party, matchup, and sim result
 
   services:
     - character list service:
       - contains the list of all characters
     - party service:
       - contains characters in the party as well as other party info
-    - map service:
-      - contains list of all dungeons on map
-    - dungeon service
-      - contains info about selected dungeon
-    - adventure service:
+    - sim service:
       - contains info about the simulation of the dungeon for the current party
 
   directives:
     - party slot
     - selectable character
-    - selectable dungeon
 
 
