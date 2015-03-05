@@ -1,156 +1,288 @@
-'use strict';var b = this;
-function f(a, g) {
-  var d = a.split("."), c = b;
-  d[0] in c || !c.execScript || c.execScript("var " + d[0]);
-  for (var e;d.length && (e = d.shift());) {
-    d.length || void 0 === g ? c = c[e] ? c[e] : c[e] = {} : c[e] = g;
+'use strict';var c = this;
+function g(a, b) {
+  var e = a.split("."), d = c;
+  e[0] in d || !d.execScript || d.execScript("var " + e[0]);
+  for (var f;e.length && (f = e.shift());) {
+    e.length || void 0 === b ? d = d[f] ? d[f] : d[f] = {} : d[f] = b;
   }
 }
 ;function h() {
 }
-f("app.AppController", h);
+g("app.AppController", h);
 function k() {
 }
-f("app.AppService", k);
-function l() {
-}
-f("app.levela.LevelAService", l);
-function m() {
-}
-f("app.levela.LevelAController", m);
-m.$inject = ["levelAService"];
-var n = angular.module("app.levela", []);
-n.config(["$routeProvider", function(a) {
-  a.when("/level-a", {templateUrl:"views/level-a/level-a.html", controller:m, controllerAs:"levelACtrl"});
-}]);
-n.controller("levelACtrl", m);
-n.service("levelAService", l);
-function p(a) {
+g("app.AppService", k);
+function l(a) {
   this.a = a;
 }
-f("app.characterTemplate.CharacterTemplateApiService", p);
-p.prototype = {get:function() {
-  return this.a.get("127.0.0.1:3000/api/character_template");
+g("app.characterTemplate.CharacterTemplateApiService", l);
+l.$inject = ["$http"];
+l.prototype = {get:function() {
+  return this.a.get("http://127.0.0.1:3000/api/character_templates");
 }, create:function(a) {
-  return this.a.post("127.0.0.1:3000/api/character_template", a);
+  return this.a.post("http://127.0.0.1:3000/api/character_templates", a);
 }, update:function(a) {
-  return this.a.put("127.0.0.1:3000/api/character_template/" + a.id, a);
+  return this.a.put("http://127.0.0.1:3000/api/character_templates/" + a.id, a);
 }, destroy:function(a) {
-  return this.a.delete("127.0.0.1:3000/api/character_template/" + a.id);
+  return this.a.delete("http://127.0.0.1:3000/api/character_templates/" + a.id);
 }};
-function q() {
-}
-f("app.characterTemplate.CharacterTemplateService", q);
-var r = angular.module("app.characterTemplate", []);
-r.service("characterTemplateApiService", p);
-r.service("characterTemplateService", q);
-function s(a) {
+function m(a) {
   this.a = a;
 }
-f("app.itemTemplate.ItemTemplateApiService", s);
-s.prototype = {get:function() {
-  return this.a.get("127.0.0.1:3000/api/item_template");
+g("app.itemTemplate.ItemTemplateApiService", m);
+m.$inject = ["$http"];
+m.prototype = {get:function() {
+  return this.a.get("http://127.0.0.1:3000/api/item_templates");
 }, create:function(a) {
-  return this.a.post("127.0.0.1:3000/api/item_template", a);
+  return this.a.post("http://127.0.0.1:3000/api/item_templates", a);
 }, update:function(a) {
-  return this.a.put("127.0.0.1:3000/api/item_template/" + a.id, a);
+  return this.a.put("http://127.0.0.1:3000/api/item_templates/" + a.id, a);
 }, destroy:function(a) {
-  return this.a.delete("127.0.0.1:3000/api/item_template/" + a.id);
+  return this.a.delete("http://127.0.0.1:3000/api/item_templates/" + a.id);
 }};
-function t() {
-}
-f("app.itemTemplate.ItemTemplateService", t);
-var u = angular.module("app.itemTemplate", []);
-u.service("itemTemplateApiService", s);
-u.service("itemTemplateService", t);
-function v(a) {
+function n(a) {
   this.a = a;
 }
-f("app.memberItem.MemberItemApiService", v);
-v.prototype = {get:function() {
-  return this.a.get("127.0.0.1:3000/api/member_item");
+g("app.memberItem.MemberItemApiService", n);
+n.$inject = ["$http"];
+n.prototype = {get:function() {
+  return this.a.get("http://127.0.0.1:3000/api/member_item");
 }, create:function(a) {
-  return this.a.post("127.0.0.1:3000/api/member_item", a);
+  return this.a.post("http://127.0.0.1:3000/api/member_item", a);
 }, update:function(a) {
-  return this.a.put("127.0.0.1:3000/api/member_item/" + a.id, a);
+  return this.a.put("http://127.0.0.1:3000/api/member_item/" + a.id, a);
 }, destroy:function(a) {
-  return this.a.delete("127.0.0.1:3000/api/member_item/" + a.id);
+  return this.a.delete("http://127.0.0.1:3000/api/member_item/" + a.id);
 }};
-function w() {
+function p() {
 }
-f("app.memberItem.MemberItemService", w);
-var x = angular.module("app.memberItem", []);
-x.service("memberItemApiService", v);
-x.service("memberItemService", w);
+g("app.memberItem.MemberItemService", p);
+var q = angular.module("app.memberItem", []);
+q.service("memberItemApiService", n);
+q.service("memberItemService", p);
+function r(a) {
+  this.a = a;
+}
+g("app.memberSkill.MemberSkillApiService", r);
+r.$inject = ["$http"];
+r.prototype = {get:function() {
+  return this.a.get("http://127.0.0.1:3000/api/member_skill");
+}, create:function(a) {
+  return this.a.post("http://127.0.0.1:3000/api/member_skill", a);
+}, update:function(a) {
+  return this.a.put("http://127.0.0.1:3000/api/member_skill/" + a.id, a);
+}, destroy:function(a) {
+  return this.a.delete("http://127.0.0.1:3000/api/member_skill/" + a.id);
+}};
+function s() {
+}
+g("app.memberSkill.MemberSkillService", s);
+var t = angular.module("app.memberSkill", []);
+t.service("memberSkillApiService", r);
+t.service("memberSkillService", s);
+function u(a) {
+  this.a = a;
+}
+g("app.party.PartyApiService", u);
+u.$inject = ["$http"];
+u.prototype = {get:function() {
+  return this.a.get("http://127.0.0.1:3000/api/party");
+}, create:function(a) {
+  return this.a.post("http://127.0.0.1:3000/api/party", a);
+}, update:function(a) {
+  return this.a.put("http://127.0.0.1:3000/api/party/" + a.id, a);
+}, destroy:function(a) {
+  return this.a.delete("http://127.0.0.1:3000/api/party/" + a.id);
+}};
+function v() {
+}
+g("app.party.PartyService", v);
+var w = angular.module("app.party", []);
+w.service("partyApiService", u);
+w.service("partyService", v);
+var x = ["errors", "selectParty"];
 function y(a) {
-  this.a = a;
+  this.g = a;
+  this.d = {};
+  z(this);
 }
-f("app.memberSkill.MemberSkillApiService", y);
-y.prototype = {get:function() {
-  return this.a.get("127.0.0.1:3000/api/member_skill");
-}, create:function(a) {
-  return this.a.post("127.0.0.1:3000/api/member_skill", a);
-}, update:function(a) {
-  return this.a.put("127.0.0.1:3000/api/member_skill/" + a.id, a);
-}, destroy:function(a) {
-  return this.a.delete("127.0.0.1:3000/api/member_skill/" + a.id);
+g("app.pubSub.PubSubService", y);
+y.$inject = ["postal"];
+y.prototype = {subscribe:function(a, b, e) {
+  return this.d[a].subscribe(b, e);
 }};
-function z() {
+function z(a) {
+  x.forEach(function(b) {
+    a.d[b] = a.g.channel(b);
+  });
 }
-f("app.memberSkill.MemberSkillService", z);
-var A = angular.module("app.memberSkill", []);
-A.service("memberSkillApiService", y);
-A.service("memberSkillService", z);
-function B(a) {
-  this.a = a;
+;function A(a, b) {
+  this.e = a;
+  this.b = {};
+  b.subscribe("selectParty", "launched", this.c.bind(this));
 }
-f("app.party.PartyApiService", B);
-B.prototype = {get:function() {
-  return this.a.get("127.0.0.1:3000/api/party");
-}, create:function(a) {
-  return this.a.post("127.0.0.1:3000/api/party", a);
-}, update:function(a) {
-  return this.a.put("127.0.0.1:3000/api/party/" + a.id, a);
-}, destroy:function(a) {
-  return this.a.delete("127.0.0.1:3000/api/party/" + a.id);
+g("app.characterTemplate.CharacterTemplateService", A);
+A.$inject = ["characterTemplateApiService", "pubSubService"];
+A.prototype = {c:function() {
+  var a = this;
+  return this.e.get().then(function(b) {
+    b.data.forEach(function(b) {
+      a.b["" + b.id] = b;
+    });
+  });
+}, get:function() {
+  return this.b;
 }};
-function C() {
-}
-f("app.party.PartyService", C);
-var D = angular.module("app.party", []);
-D.service("partyApiService", B);
-D.service("partyService", C);
-function E(a) {
-  this.a = a;
-}
-f("app.skillTemplate.SkillTemplateApiService", E);
-E.prototype = {get:function() {
-  return this.a.get("127.0.0.1:3000/api/skill_template");
-}, create:function(a) {
-  return this.a.post("127.0.0.1:3000/api/skill_template", a);
-}, update:function(a) {
-  return this.a.put("127.0.0.1:3000/api/skill_template/" + a.id, a);
-}, destroy:function(a) {
-  return this.a.delete("127.0.0.1:3000/api/skill_template/" + a.id);
-}};
-function F() {
-}
-f("app.skillTemplate.SkillTemplateService", F);
-var G = angular.module("app.skillTemplate", []);
-G.service("skillTemplateApiService", E);
-G.service("skillTemplateService", F);
-var H = angular.module("template", ["ngRoute", "ngTouch", r.name, u.name, n.name, x.name, A.name, D.name, G.name]);
-H.config(["$routeProvider", function(a) {
-  a.otherwise({redirectTo:"/level-a"});
+var B = angular.module("app.characterTemplate", []);
+B.service("characterTemplateApiService", l);
+B.service("characterTemplateService", A);
+B.run(["characterTemplateService", function() {
 }]);
-H.config(["$locationProvider", function(a) {
+function C(a, b) {
+  this.f = a;
+  this.b = {};
+  b.subscribe("selectParty", "launched", this.c.bind(this));
+}
+g("app.itemTemplate.ItemTemplateService", C);
+C.$inject = ["itemTemplateApiService", "pubSubService"];
+C.prototype = {c:function() {
+  var a = this;
+  return this.f.get().then(function(b) {
+    b.data.forEach(function(b) {
+      a.b["" + b.id] = b;
+    });
+  });
+}, get:function() {
+  return this.b;
+}};
+var D = angular.module("app.itemTemplate", []);
+D.service("itemTemplateApiService", m);
+D.service("itemTemplateService", C);
+D.run(["itemTemplateService", function() {
+}]);
+var E = angular.module("app.pubSub", []);
+E.service("pubSubService", y);
+E.constant("postal", window.postal);
+function F(a) {
+  this.a = a;
+}
+g("app.skillTemplate.SkillTemplateApiService", F);
+F.$inject = ["$http"];
+F.prototype = {get:function() {
+  return this.a.get("http://127.0.0.1:3000/api/skill_templates");
+}, create:function(a) {
+  return this.a.post("http://127.0.0.1:3000/api/skill_templates", a);
+}, update:function(a) {
+  return this.a.put("http://127.0.0.1:3000/api/skill_templates/" + a.id, a);
+}, destroy:function(a) {
+  return this.a.delete("http://127.0.0.1:3000/api/skill_templates/" + a.id);
+}};
+function G(a, b) {
+  this.h = a;
+  this.b = {};
+  b.subscribe("selectParty", "launched", this.c.bind(this));
+}
+g("app.skillTemplate.SkillTemplateService", G);
+G.$inject = ["skillTemplateApiService", "pubSubService"];
+G.prototype = {c:function() {
+  var a = this;
+  return this.h.get().then(function(b) {
+    b.data.forEach(function(b) {
+      a.b["" + b.id] = b;
+    });
+  });
+}, get:function() {
+  return this.b;
+}};
+var H = angular.module("app.skillTemplate", []);
+H.service("skillTemplateApiService", F);
+H.service("skillTemplateService", G);
+H.run(["skillTemplateService", function() {
+}]);
+function I() {
+}
+g("app.editParty.EditPartyController", I);
+I.$inject = ["pubSubService"];
+I.prototype = {};
+var J = angular.module("app.editParty", []);
+J.config(["$routeProvider", function(a) {
+  a.when("/edit-party", {templateUrl:"views/routes/edit-party/edit-party.html", controller:I, controllerAs:"editPartyCtrl"});
+}]);
+J.controller("editPartyCtrl", I);
+function K() {
+}
+g("app.editTactics.EditTacticsController", K);
+K.$inject = ["pubSubService"];
+K.prototype = {};
+var L = angular.module("app.editTactics", []);
+L.config(["$routeProvider", function(a) {
+  a.when("/edit-tactics", {templateUrl:"views/routes/edit-tactics/edit-tactics.html", controller:K, controllerAs:"editTacticsCtrl"});
+}]);
+L.controller("editTacticsCtrl", K);
+function M() {
+}
+g("app.findMatch.FindMatchController", M);
+M.$inject = ["pubSubService"];
+M.prototype = {};
+var N = angular.module("app.findMatch", []);
+N.config(["$routeProvider", function(a) {
+  a.when("/find-match", {templateUrl:"views/routes/find-match/find-match.html", controller:M, controllerAs:"findMatchCtrl"});
+}]);
+N.controller("findMatchCtrl", M);
+function O() {
+}
+g("app.matchResult.MatchResultController", O);
+O.$inject = ["pubSubService"];
+O.prototype = {};
+var P = angular.module("app.matchResult", []);
+P.config(["$routeProvider", function(a) {
+  a.when("/match-result", {templateUrl:"views/routes/match-result/match-result.html", controller:O, controllerAs:"matchResultCtrl"});
+}]);
+P.controller("matchResultCtrl", O);
+function Q() {
+}
+g("app.root.RootController", Q);
+Q.$inject = ["pubSubService"];
+Q.prototype = {};
+var R = angular.module("app.root", []);
+R.config(["$routeProvider", function(a) {
+  a.when("/root", {templateUrl:"views/routes/root/root.html", controller:Q, controllerAs:"rootCtrl"});
+}]);
+R.controller("rootCtrl", Q);
+function S(a, b, e, d) {
+  this.characterTemplates = b.get();
+  this.itemTemplates = e.get();
+  this.skillTemplates = d.get();
+  console.log("%s %s %s", "selectParty", "launched", "");
+  a.d.selectParty.publish("launched", "");
+}
+g("app.selectParty.SelectPartyController", S);
+S.$inject = ["pubSubService", "characterTemplateService", "itemTemplateService", "skillTemplateService"];
+S.prototype = {};
+var T = angular.module("app.selectParty", []);
+T.config(["$routeProvider", function(a) {
+  a.when("/select-party", {templateUrl:"views/routes/select-party/select-party.html", controller:S, controllerAs:"selectPartyCtrl"});
+}]);
+T.controller("selectPartyCtrl", S);
+function U() {
+}
+g("app.signIn.SignInController", U);
+U.$inject = ["pubSubService"];
+U.prototype = {};
+var V = angular.module("app.signIn", []);
+V.config(["$routeProvider", function(a) {
+  a.when("/sign-in", {templateUrl:"views/routes/sign-in/sign-in.html", controller:U, controllerAs:"signInCtrl"});
+}]);
+V.controller("signInCtrl", U);
+var W = angular.module("template", ["ngRoute", "ngTouch", B.name, J.name, L.name, N.name, D.name, P.name, q.name, t.name, w.name, R.name, T.name, V.name, H.name, E.name]);
+W.config(["$routeProvider", function(a) {
+  a.when("/", {redirectTo:function(a, e, d) {
+    return "/" + (d["goto"] ? d["goto"] : "root");
+  }}).otherwise({redirectTo:"/root"});
+}]);
+W.config(["$locationProvider", function(a) {
   a.html5Mode(!0);
 }]);
-H.controller("appController", h);
-H.service("appService", k);
-H.filter("unsafeResource", ["$sce", function(a) {
-  return function(g) {
-    return a.trustAsResourceUrl(g);
-  };
-}]);
+W.controller("appController", h);
+W.service("appService", k);
 

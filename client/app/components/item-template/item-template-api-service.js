@@ -8,6 +8,7 @@ goog.require('app.itemTemplate.ItemTemplateModel');
 /**
  * @constructor
  * @param {!angular.$http} $http
+ * @ngInject
  * @export
  */
 app.itemTemplate.ItemTemplateApiService = function($http) {
@@ -27,7 +28,7 @@ app.itemTemplate.ItemTemplateApiService.prototype = {
    * @return {!angular.$http.HttpPromise}
    */
   get: function() {
-    return this.$http_.get(app.constants.apiRoot + 'item_template');
+    return this.$http_.get(app.constants.apiRoot + '/item_templates');
   },
 
   /**
@@ -35,7 +36,7 @@ app.itemTemplate.ItemTemplateApiService.prototype = {
    * @return {!angular.$http.HttpPromise}
    */
   create: function(itemTemplate) {
-    return this.$http_.post(app.constants.apiRoot + 'item_template',
+    return this.$http_.post(app.constants.apiRoot + '/item_templates',
         itemTemplate);
   },
 
@@ -44,7 +45,7 @@ app.itemTemplate.ItemTemplateApiService.prototype = {
    * @return {!angular.$http.HttpPromise}
    */
   update: function(itemTemplate) {
-    return this.$http_.put(app.constants.apiRoot + 'item_template/' +
+    return this.$http_.put(app.constants.apiRoot + '/item_templates/' +
         itemTemplate.id, itemTemplate);
   },
 
@@ -53,7 +54,7 @@ app.itemTemplate.ItemTemplateApiService.prototype = {
    * @return {!angular.$http.HttpPromise}
    */
   destroy: function(itemTemplate) {
-    return this.$http_.delete(app.constants.apiRoot + 'item_template/' +
+    return this.$http_.delete(app.constants.apiRoot + '/item_templates/' +
         itemTemplate.id);
   }
 };

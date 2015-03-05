@@ -3,11 +3,7 @@ class Api::ItemTemplatesController < ApplicationController
   def index
     item_templates = ItemTemplate.all
 
-    if item_templates.blank?
-      render json: { error: 'ItemTemplate could not be found' }, status: :not_found
-    else
-      render json: item_templates.as_json, status: :ok
-    end
+    render json: item_templates.as_json, status: :ok
   end
 
   def create

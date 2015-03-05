@@ -15,3 +15,6 @@ app.skillTemplate.module.service('skillTemplateApiService',
 
 app.skillTemplate.module.service('skillTemplateService',
     app.skillTemplate.SkillTemplateService);
+
+app.skillTemplate.module.run(['skillTemplateService',
+  function(skillTemplateService) {}]);

@@ -1,11 +1,16 @@
 <?xml version="1.0"?>
 <testsuites>
-  <testsuite name="PhantomJS 1.9.8 (Linux)" package="" timestamp="2015-02-23T04:30:23" id="0" hostname="localhost.localdomain" tests="1" errors="0" failures="0" time="0.004">
+  <testsuite name="PhantomJS 1.9.8 (Linux)" package="" timestamp="2015-03-05T03:59:10" id="0" hostname="localhost.localdomain" tests="5" errors="0" failures="0" time="0.018">
     <properties>
       <property name="browser.fullName" value="Mozilla/5.0 (Unknown; Linux x86_64) AppleWebKit/534.34 (KHTML, like Gecko) PhantomJS/1.9.8 Safari/534.34"/>
     </properties>
-    <testcase name="should initialise the controller" time="0.004" classname="PhantomJS 1.9.8 (Linux).app_AppController constructor"/>
-    <system-out><![CDATA[
+    <testcase name="should initialise the controller" time="0.005" classname="PhantomJS 1.9.8 (Linux).app_AppController constructor"/>
+    <testcase name="calls characterTemplateApiService.get()" time="0.007" classname="PhantomJS 1.9.8 (Linux).app_characterTemplate_CharacterTemplateService buildCharacterTemplates"/>
+    <testcase name="creates channels from the constants file" time="0.003" classname="PhantomJS 1.9.8 (Linux).PubSubService constructor"/>
+    <testcase name="subscribes to a particular channel and topic with the supplied callback" time="0.001" classname="PhantomJS 1.9.8 (Linux).PubSubService subscribe"/>
+    <testcase name="publishes an event using the supplied channel, topic, and message" time="0.002" classname="PhantomJS 1.9.8 (Linux).PubSubService publish"/>
+    <system-out><![CDATA[PhantomJS 1.9.8 (Linux) LOG: '%s %s %s', 'errors', 'topic', 'message'
+
 ]]></system-out>
     <system-err/>
   </testsuite>

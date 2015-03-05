@@ -15,3 +15,6 @@ app.itemTemplate.module.service('itemTemplateApiService',
 
 app.itemTemplate.module.service('itemTemplateService',
     app.itemTemplate.ItemTemplateService);
+
+app.itemTemplate.module.run(['itemTemplateService',
+  function(itemTemplateService) {}]);

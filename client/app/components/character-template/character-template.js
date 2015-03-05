@@ -15,3 +15,6 @@ app.characterTemplate.module.service('characterTemplateApiService',
 
 app.characterTemplate.module.service('characterTemplateService',
     app.characterTemplate.CharacterTemplateService);
+
+app.characterTemplate.module.run(['characterTemplateService',
+  function(characterTemplateService) {}]);

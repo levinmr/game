@@ -3,11 +3,7 @@ class Api::SkillTemplatesController < ApplicationController
   def index
     skill_templates = SkillTemplate.all
 
-    if skill_templates.blank?
-      render json: { error: 'SkillTemplate could not be found' }, status: :not_found
-    else
-      render json: skill_templates.as_json, status: :ok
-    end
+    render json: skill_templates.as_json, status: :ok
   end
 
   def create

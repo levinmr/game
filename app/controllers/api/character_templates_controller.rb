@@ -3,11 +3,7 @@ class Api::CharacterTemplatesController < ApplicationController
   def index
     character_templates = CharacterTemplate.all
 
-    if character_templates.blank?
-      render json: { error: 'CharacterTemplate could not be found' }, status: :not_found
-    else
-      render json: character_templates.as_json, status: :ok
-    end
+    render json: character_templates.as_json, status: :ok
   end
 
   def create

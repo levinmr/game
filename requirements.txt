@@ -16,6 +16,7 @@ requirements:
 
 server:
   - models:
+    -user
     -character_template
     -party
     -party_member
@@ -32,10 +33,32 @@ server:
 
 client:
   routes:
-    -level-a:
-      - has character list, party slots, and start adventure button
-    -level-b:
-      - current party, matchup, and sim result
+    -/root
+      - Data: No data needed
+      - Behavior: Main page with title and sign-in link and select-party link
+    -/sign-in
+      - Data: No data needed, populates user
+      - Behavior: authenticate user, redirect to root
+    -/select-party/userId:
+      - Data: create temp user if no ID provided
+        - Party
+        - Member
+        - Templates
+      - Behavior: lists parties that the user has created in the past
+        - Provides link to edit-party
+    -/edit-party/partyId:
+      - Data: User, party, members, templates
+      - Behavior: allows you to choose templates for each party member slot
+    -/edit-tactics/partyId:
+      - Data: user, party, members, templates, tactics
+      - Behavior: set tactics for each party member
+    -/find-match/partyId
+      - Data: user, party, members, templates, tactics
+      - Behavior: mark party as 'looking for a match',
+        - poll server to see if match has been found
+    -/match-result/matchId:
+      - Data: user, party, members, templates, tactics, match
+      - Behavior: show match and result
 
   services:
     - character list service:

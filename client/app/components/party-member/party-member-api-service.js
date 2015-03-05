@@ -8,6 +8,7 @@ goog.require('app.partyMember.PartyMemberModel');
 /**
  * @constructor
  * @param {!angular.$http} $http
+ * @ngInject
  * @export
  */
 app.partyMember.PartyMemberApiService = function($http) {
@@ -27,7 +28,7 @@ app.partyMember.PartyMemberApiService.prototype = {
    * @return {!angular.$http.HttpPromise}
    */
   get: function() {
-    return this.$http_.get(app.constants.apiRoot + 'party_member');
+    return this.$http_.get(app.constants.apiRoot + '/party_member');
   },
 
   /**
@@ -35,7 +36,7 @@ app.partyMember.PartyMemberApiService.prototype = {
    * @return {!angular.$http.HttpPromise}
    */
   create: function(partyMember) {
-    return this.$http_.post(app.constants.apiRoot + 'party_member',
+    return this.$http_.post(app.constants.apiRoot + '/party_member',
         partyMember);
   },
 
@@ -44,7 +45,7 @@ app.partyMember.PartyMemberApiService.prototype = {
    * @return {!angular.$http.HttpPromise}
    */
   update: function(partyMember) {
-    return this.$http_.put(app.constants.apiRoot + 'party_member/' +
+    return this.$http_.put(app.constants.apiRoot + '/party_member/' +
         partyMember.id, partyMember);
   },
 
@@ -53,7 +54,7 @@ app.partyMember.PartyMemberApiService.prototype = {
    * @return {!angular.$http.HttpPromise}
    */
   destroy: function(partyMember) {
-    return this.$http_.delete(app.constants.apiRoot + 'party_member/' +
+    return this.$http_.delete(app.constants.apiRoot + '/party_member/' +
         partyMember.id);
   }
 };
